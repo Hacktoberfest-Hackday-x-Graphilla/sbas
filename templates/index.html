@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="RealAI Toolkit 2.0, a professional AI workspace for real-life work.">
+<title>RealAI Toolkit 2.0</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-glyph"><i></i><i></i><i></i></div><div><strong>REALAI</strong><small>Toolkit 2.0</small></div></div>
+    <button class="mobile-close" id="mobileClose">×</button>
+    <div class="side-section"><span>COMMAND CENTER</span></div>
+    <button class="side-btn active" data-view="overview"><span class="side-icon">⌂</span><span><b>Overview</b><small>Workspace control room</small></span></button>
+    <button class="side-btn" data-view="tools"><span class="side-icon">✦</span><span><b>AI Tools</b><small id="toolCountSide">10 tools</small></span></button>
+    <button class="side-btn" id="historyBtn"><span class="side-icon">◷</span><span><b>History</b><small>Saved generations</small></span></button>
+    <button class="side-btn" id="analyticsBtn"><span class="side-icon">◈</span><span><b>Analytics</b><small>Usage and performance</small></span></button>
+    <button class="side-btn" id="apiBtn"><span class="side-icon">{ }</span><span><b>API Playground</b><small>Test your real API</small></span></button>
+    <div class="side-section"><span>TOOLKIT</span></div>
+    <div id="toolNav" class="tool-nav"></div>
+    <div class="sidebar-bottom">
+      <div class="connection"><span class="status-dot" id="sideStatusDot"></span><div><b id="sideStatus">System online</b><small id="sideStatusSub">SQLite + API ready</small></div></div>
+      <button class="side-btn compact" id="settingsBtn"><span class="side-icon">⚙</span><span><b>Settings</b><small>Profile & provider</small></span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="top-left"><button class="menu-btn" id="menuBtn">☰</button><div><div class="eyebrow">REAL-LIFE AI OPERATIONS</div><h1 id="pageTitle">Overview</h1></div></div>
+      <div class="top-right"><button class="top-icon" id="healthBtn" title="System health">⌁</button><div class="live-pill"><span></span><span id="statusText">Checking system</span></div><div class="avatar" id="avatar">S</div></div>
+    </header>
+
+    <section class="content">
+      <div id="overviewView" class="view">
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow cyan">PROFESSIONAL WORKSPACE • FREE-FIRST</div>
+            <h2>Useful AI for work that actually needs doing.</h2>
+            <p>RealAI turns writing, documents, meetings, code, data, study, planning, and communication into structured outputs you can use immediately.</p>
+            <div class="hero-actions"><button class="primary" id="launchBtn">Launch AI Tool <span>↗</span></button><button class="secondary" id="quickApiBtn">Open API Playground</button></div>
+            <div class="hero-tags"><span>10 practical tools</span><span>REST API</span><span>SQLite DBMS</span><span>3D interface</span><span>Free/local fallback</span></div>
+          </div>
+          <div class="scene" aria-hidden="true"><div class="scene-grid"></div><div class="scene-core"><span>RA</span><em></em></div><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="node n1">AI</div><div class="node n2">DB</div><div class="node n3">API</div><div class="float-card fc1">REAL TIME<br><b>API</b></div><div class="float-card fc2">10<br><b>TOOLS</b></div></div>
+        </section>
+
+        <section class="stat-grid">
+          <div class="stat-card"><span>GENERATIONS</span><strong id="statGenerations">0</strong><small>saved locally</small></div>
+          <div class="stat-card"><span>FAVORITES</span><strong id="statFavorites">0</strong><small>reusable results</small></div>
+          <div class="stat-card"><span>AVG LATENCY</span><strong id="statLatency">0 ms</strong><small>real request metric</small></div>
+          <div class="stat-card"><span>AI PROVIDERS</span><strong id="statProviders">0</strong><small>configured adapters</small></div>
+        </section>
+
+        <section class="panel-grid">
+          <div class="panel wide"><div class="panel-head"><div><span class="eyebrow">WORKFLOW</span><h3>Start with a real task</h3></div><button class="text-btn" id="viewToolsBtn">View all tools ↗</button></div><div id="featureTools" class="feature-tools"></div></div>
+          <div class="panel"><div class="panel-head"><div><span class="eyebrow">SYSTEM</span><h3>Live health</h3></div><span class="health-badge" id="healthBadge">CHECKING</span></div><div id="healthPanel" class="health-panel"></div></div>
+          <div class="panel wide"><div class="panel-head"><div><span class="eyebrow">ACTIVITY</span><h3>Recent generations</h3></div><button class="text-btn" id="viewHistoryBtn">Open history ↗</button></div><div id="recentPanel" class="recent-panel"></div></div>
+        </section>
+      </div>
+
+      <div id="toolsView" class="view hidden">
+        <section class="page-intro"><div><div class="eyebrow cyan">AI TOOLKIT</div><h2>Choose the right tool for the job.</h2><p>Each tool has a focused output contract so the result is useful beyond the demo screen.</p></div><button class="secondary" id="backOverview">← Overview</button></section>
+        <div id="allToolsGrid" class="all-tools-grid"></div>
+        <section id="toolWorkspace" class="tool-workspace hidden">
+          <div class="tool-banner"><div><div class="eyebrow" id="toolKicker">SMART WRITER</div><h2 id="toolName">Smart Writer</h2><p id="toolDescription"></p></div><div class="tool-actions"><span class="provider-badge" id="providerBadge">AUTO ROUTE</span><button class="secondary" id="closeTool">Close</button></div></div>
+          <div id="modeRow" class="mode-row"></div>
+          <div class="work-grid"><div class="editor-pane"><div class="pane-head"><span>INPUT</span><span id="counter">0 / 30,000</span></div><textarea id="inputText" maxlength="30000" spellcheck="true"></textarea><div class="input-tools"><label class="file-btn">Load text file <input id="fileInput" type="file" accept=".txt,.md,.csv,.json,.html" hidden></label><button class="mini" id="sampleBtn">Use sample</button></div><div class="prompt-strip" id="promptStrip">Tip: Be specific about the outcome you need.</div></div><div class="result-pane"><div class="pane-head"><span>RESULT</span><div><button class="mini" id="copyBtn">Copy</button><button class="mini" id="downloadBtn">Export</button><button class="mini" id="favoriteBtn">☆ Save</button></div></div><div id="outputText" class="output"><div class="empty"><strong>Ready when you are.</strong><span>Run this tool to generate a structured result.</span></div></div></div></div>
+          <div class="run-row"><button class="primary run" id="runBtn"><span>Run AI Tool</span><b>↗</b></button><button class="secondary" id="clearBtn">Clear</button><span class="run-note" id="runNote">Your result is automatically stored in local history.</span></div>
+        </section>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal hidden" id="modal"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow cyan" id="modalKicker">REALAI</div><h2 id="modalTitle">History</h2></div><button class="modal-close" id="closeModal">×</button></div><div id="modalBody"></div></div></div>
+<div class="toast hidden" id="toast"></div>
+<script src="/static/app.js"></script>
+</body></html>

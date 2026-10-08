@@ -1,0 +1,4 @@
+.env
+realai.sqlite3
+__pycache__/
+*.pyc
